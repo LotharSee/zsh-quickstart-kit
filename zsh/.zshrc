@@ -2,6 +2,12 @@
 #
 # BSD licensed, see LICENSE.txt
 
+BULLETTRAIN_HG_SHOW="false"
+BULLETTRAIN_NVM_SHOW="false"
+BULLETTRAIN_VIRTUALENV_SHOW="false"
+BULLETTRAIN_RUBY_SHOW="false"
+BULLETTRAIN_GO_SHOW="false"
+
 # Set this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
