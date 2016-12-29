@@ -24,19 +24,19 @@ unsetopt correctall
 PATH=/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:/bin:/usr/bin
 
 # Conditional PATH additions
-for path_candidate in /opt/local/sbin \
-  /Applications/Xcode.app/Contents/Developer/usr/bin \
-  /opt/local/bin \
-  /usr/local/share/npm/bin \
-  ~/.cabal/bin \
-  ~/.rbenv/bin \
-  ~/bin \
-  ~/src/gocode/bin
-do
-  if [ -d ${path_candidate} ]; then
-    export PATH=${PATH}:${path_candidate}
-  fi
-done
+#for path_candidate in /opt/local/sbin \
+#  /Applications/Xcode.app/Contents/Developer/usr/bin \
+#  /opt/local/bin \
+#  /usr/local/share/npm/bin \
+#  ~/.cabal/bin \
+#  ~/.rbenv/bin \
+#  ~/bin \
+#  ~/src/gocode/bin
+#do
+#  if [ -d ${path_candidate} ]; then
+#    export PATH=${PATH}:${path_candidate}
+#  fi
+#done
 
 # Yes, these are a pain to customize. Fortunately, Geoff Greer made an online
 # tool that makes it easy to customize your color scheme and keep them in sync
@@ -127,12 +127,6 @@ bindkey " " globalias
 bindkey "^ " magic-space           # control-space to bypass completion
 bindkey -M isearch " " magic-space # normal space during searches
 
-# Customize to your needs...
-# Stuff that works on bash or zsh
-if [ -r ~/.sh_aliases ]; then
-  source ~/.sh_aliases
-fi
-
 # Stuff only tested on zsh, or explicitly zsh-specific
 if [ -r ~/.zsh_aliases ]; then
   source ~/.zsh_aliases
@@ -142,50 +136,7 @@ if [ -r ~/.zsh_functions ]; then
   source ~/.zsh_functions
 fi
 
-export LOCATE_PATH=/var/db/locate.database
-
-# Load AWS credentials
-if [ -f ~/.aws/aws_variables ]; then
-  source ~/.aws/aws_variables
-fi
-
-# JAVA setup - needed for iam-* tools
-if [ -d /Library/Java/Home ];then
-  export JAVA_HOME=/Library/Java/Home
-fi
-
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  # We're on osx
-  [ -f ~/.osx_aliases ] && source ~/.osx_aliases
-  if [ -d ~/.osx_aliases.d ]; then
-    for alias_file in ~/.osx_aliases.d/*
-    do
-      source $alias_file
-    done
-  fi
-fi
-
-# deal with screen, if we're using it - courtesy MacOSXHints.com
-# Login greeting ------------------
-if [ "$TERM" = "screen" -a ! "$SHOWED_SCREEN_MESSAGE" = "true" ]; then
-  detached_screens=$(screen -list | grep Detached)
-  if [ ! -z "$detached_screens" ]; then
-    echo "+---------------------------------------+"
-    echo "| Detached screens are available:       |"
-    echo "$detached_screens"
-    echo "+---------------------------------------+"
-  fi
-fi
-
-if [ -f /usr/local/etc/grc.bashrc ]; then
-  source "$(brew --prefix)/etc/grc.bashrc"
-
-  function ping5(){
-    grc --color=auto ping -c 5 "$@"
-  }
-else
-  alias ping5='ping -c 5'
-fi
+alias ping5='ping -c 5'
 
 # Speed up autocomplete, force prefix mapping
 zstyle ':completion:*' accept-exact '*(N)'
@@ -199,17 +150,6 @@ if [ -d ~/.zsh-completions ]; then
   do
     source "$completion"
   done
-fi
-
-echo
-echo "Current SSH Keys:"
-ssh-add -l
-echo
-
-# Honor old .zshrc.local customizations, but print depecation warning.
-if [ -f ~/.zshrc.local ]; then
-  source ~/.zshrc.local
-  echo ".zshrc.local is deprecated - use files in ~/.zshrc.d instead"
 fi
 
 # Make it easy to append your own customizations that override the above by

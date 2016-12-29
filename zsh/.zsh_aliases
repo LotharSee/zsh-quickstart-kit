@@ -39,32 +39,11 @@ export CVS_RSH=ssh
 
 alias historysummary="history | awk '{a[\$2]++} END{for(i in a){printf \"%5d\t%s\n\",a[i],i}}' | sort -rn | head"
 
-if [ -x /bin/vim ]; then
-    alias vi="/bin/vim"
-    alias vim="/bin/vim"
-    export EDITOR="/bin/vim"
-fi
-
-if [ -x /usr/bin/vim ]; then
-    alias vi="/usr/bin/vim"
-    alias vim="/usr/bin/vim"
-    export EDITOR="/usr/bin/vim"
-fi
-
-# MacPorts has a newer vim than Apple ships
-if [ -x /opt/local/bin/vim ]; then
-    alias vim="/opt/local/bin/vim"
-    alias vi="/opt/local/bin/vim"
-    export EDITOR="/opt/local/bin/vim"
-fi
-
-# So does brew
 if [ -x /usr/local/bin/vim ]; then
     alias vim="/usr/local/bin/vim"
     alias vi="/usr/local/bin/vim"
     export EDITOR="/usr/local/bin/vim"
 fi
-# Clearly, I really like vim.
 
 export VISUAL=${EDITOR}
 
@@ -117,31 +96,6 @@ alias tartvf="tar tvf"
 alias tartvzf="tar tvzf"
 alias tarxvf="tar xvf"
 
-# Deal with various stupidities
-
-# Thanks so much for breaking ldapsearch, fink
-if [ -x /sw/bin/ldapsearch ];then
-  alias ldapsearch=/usr/bin/ldapsearch
-fi
-
-if [ -x /usr/bin/vagrant ]; then
-  alias vagrant="/usr/bin/vagrant"
-fi
-
-# Use brew versions if present
-if [ -x /usr/local/bin/mysql/bin/mysql ]; then
-  alias mysql="/usr/local/mysql/bin/mysql"
-fi
-
-if [ -x /usr/local/bin/mysql/bin/mysqladmin ]; then
-  alias mysqladmin="/usr/local/mysql/bin/mysqladmin"
-fi
-
 alias ..="cd .."
 alias ...="cd ../.."
 
-# Honor old .zsh_aliases.local customizations, but print depecation warning.
-if [ -f ~/.zsh_aliases.local ]; then
-  source ~/.zsh_aliases.local
-  echo ".zsh_aliases.local is deprecated. Make entries in ~/.zshrc.d instead."
-fi
