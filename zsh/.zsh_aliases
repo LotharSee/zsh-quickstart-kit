@@ -99,3 +99,12 @@ alias tarxvf="tar xvf"
 alias ..="cd .."
 alias ...="cd ../.."
 
+alias git-bim="git branch --merged prod | grep -v prod | xargs -n 1 git branch -d"
+alias git-bimm="git branch --merged master | grep -v master | xargs -n 1 git branch -d"
+
+# Custom dev env
+export VAGRANT_CWD=/Users/benjamin/datadog/
+export GOPATH=/Users/benjamin/datadog/go/
+alias ddst="ssh benjamin@jumpbox.datad0g.com"
+alias ddpr="ssh benjamin@jumpbox.datadoghq.com"
+alias goforit='cd /Users/benjamin/datadog/go/src/github.com/DataDog/dd-go'
